@@ -131,6 +131,7 @@ function Comment(req, res) {
 
 function IMG(req, res) {
     let data = req.body
+    console.log(req.files)
     let photo = req.files.file
     console.log(data)
     console.log(photo)
