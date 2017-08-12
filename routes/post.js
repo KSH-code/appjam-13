@@ -65,7 +65,7 @@ function Profile(req, res) {
         if (!fs.existsSync(dir)) {
             fs.mkdirSync(dir)
         }
-        fs.writeFileSync(`${dir}/1.jpg`, files.img)
+        fs.writeFileSync(`${dir}/1.png`, files.img)
         res.json({ success: true })
     } else
         res.json({ success: false })
