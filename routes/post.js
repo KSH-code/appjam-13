@@ -40,7 +40,7 @@ function Register(req, res) {
             res.json({ text: 'true' })
         else
             res.json({ text: '알 수 없는 오류입니다.' })
-    })
+    }, (e) => { console.log(e) })
 }
 
 function Login(req, res) {
