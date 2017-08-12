@@ -18,7 +18,10 @@ function statusList(req, res) {
     let sql = 'select u.user_id as userId,u.type as userType,s.img as statusURL,s.starttime as startTime,s.endtime as endTime,s.name from users as u inner join `status` as s on s.`user_id`=u.`user_id` where family_idx = ?'
     let insertdata = [fk]
     mysql.Select(sql, fk).then(rs => {
-        res.json(rs)
+        if (rs.length > 0)
+            res.json(rs)
+        else
+            res.json({ success: false })
     })
 
 }

@@ -48,7 +48,7 @@ function Login(req, res) {
     let insertdata = [data.id, data.password]
     mysql.Select('select * from `users` where `user_id` = ? and `pw` = ?', insertdata).then(rs => {
         if (rs && rs.length) {
-            let jsonData = rs
+            let jsonData = rs[0]
             jsonData.success = true
             res.json(jsonData)
         } else
