@@ -130,16 +130,14 @@ function Comment(req, res) {
 }
 
 function IMG(req, res) {
-    console.log(req.body)
-    console.log(req.files)
-    let data = req.data
+    let data = req.body
     let photo = req.files.file
     if (photo) {
         let dir = __dirname + '/public/profile/' + data.id
         if (!fs.existsSync(dir)) {
             fs.mkdirSync(dir)
         }
-        fs.writeFileSync(`${dir}/1.png`, files.photo)
+        fs.writeFileSync(`${dir}/1.png`, files.data)
     } else
         res.json({ success: false })
 }
