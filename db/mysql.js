@@ -11,6 +11,8 @@ module.exports = () => {
     const con = mysql.createConnection(require('./config'))
     return {
         Select: (sql, data = []) => {
+            console.log(sql)
+            console.log(data)
             return new Promise((resolve, reject) => {
                 con.query(sql, data, (e, rs) => {
                     if (e)
