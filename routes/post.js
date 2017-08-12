@@ -132,7 +132,7 @@ function Comment(req, res) {
             res.json({ success: 'true' })
         else
             res.json({ success: 'false' })
-    })
+    }, e => { console.log(e) })
 
 }
 
