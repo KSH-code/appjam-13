@@ -8,7 +8,7 @@
 var mysql
 const r = function(app, _mysql) {
     mysql = _mysql
-    app.get('/status/:familykey', statusList)
+    app.get('/status/list/:familykey', statusList)
 }
 
 function statusList(req, res) {
