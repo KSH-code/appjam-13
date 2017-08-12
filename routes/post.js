@@ -16,8 +16,7 @@ const r = function(app, _mysql) {
 function Register(req, res) {
     let data = req.body
     let create_family = false
-    mysql.Select('select count(*) as count from `users` where `id` = ?', [data.id]).then(rs => {
-        console.log(rs)
+    mysql.Select('select count(*) as count from `users` where `user_id` = ?', [data.id]).then(rs => {
         if (rs.count > 0)
             res.json({ text: '중복된 아이디 입니다.' })
         else {
