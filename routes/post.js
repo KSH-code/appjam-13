@@ -15,7 +15,6 @@ const r = function(app, _mysql) {
 
 function Register(req, res) {
     let data = req.body
-    let create_family = false
     mysql.Select('select count(*) as count from `users` where `user_id` = ?', [data.id]).then(rs => {
         if (rs.count > 0)
             res.json({ text: '중복된 아이디 입니다.' })
@@ -27,7 +26,6 @@ function Register(req, res) {
                 insertdata.push(data.familykey)
                 return mysql.ExeCute(sql, insertdata)
             } else {
-                create_family = true
                 return mysql.ExeCute('insert into `families` (idx) values (NULL)').then(rs => {
                     insertdata.push(rs.insertedId)
                     return mysql.ExeCute(sql, insertdata)
