@@ -116,9 +116,9 @@ function Status(req, res) {
 
     }).then(rs => {
         if (rs)
-            res.json({ success: true })
+            res.json({ success: 'true' })
         else
-            res.json({ success: false })
+            res.json({ success: 'false' })
     })
 
 }
@@ -130,6 +130,8 @@ function Comment(req, res) {
 }
 
 function IMG(req, res) {
+    console.log(req.body)
+    console.log(req.files)
     let data = req.data
     let photo = req.files.file
     if (photo) {
