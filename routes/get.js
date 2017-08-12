@@ -8,5 +8,13 @@
 var mysql
 const r = function(app, _mysql) {
     mysql = _mysql
+    app.get('/status/:familykey', statusList)
+}
+
+function statusList(req, res) {
+    let data = req.body
+    let fk = req.params.familykey
+
+
 }
 module.exports = r

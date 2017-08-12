@@ -11,6 +11,8 @@ const r = function(app, _mysql) {
     mysql = _mysql
     app.post('/register', Register)
     app.post('/login', Login)
+    app.post('/status/:id', Status)
+    app.post('/comment/:idx', Comment)
 }
 
 function Register(req, res) {
@@ -45,9 +47,11 @@ function Login(req, res) {
     let data = req.body
     let insertdata = [data.id, data.password]
     mysql.Select('select * from `users` where `user_id` = ? and `pw` = ?', insertdata).then(rs => {
-        if (rs && rs.length)
-            res.json({ success: true })
-        else
+        if (rs && rs.length) {
+            let jsonData = rs
+            jsonData.success = true
+            res.json(jsonData)
+        } else
             res.json({ success: false })
     })
 }
@@ -63,5 +67,37 @@ function Profile(req, res) {
         res.json({ success: true })
     } else
         res.json({ success: false })
+}
+
+function Status(req, res) {
+    let data = req.data
+    console.log(data)
+    let insertdata = [data.user_id]
+    let sql = 'select count(*) as count from `status` where `user_id` = ?'
+    mysql.Select(sql, insertdata).then(rs => {
+        insertdata = [insertdata, data.name, data.starttime, data.url, data.endtime]
+
+        if (rs.count == 0) {
+            sql = 'insert into `status` (user_id,name,starttime,endtime,url) values (?,?,?,?,?)'
+        } else {
+            insertdata = [data.name, data.starttime, data.endtime, data.url, insertdata]
+            sql = 'update `status` set `name` = ?, `starttime` = ?, `endtime` = ?, `url` = ? where `user_id` = ?'
+
+        }
+        return mysql.Execute(sql, insertdata)
+
+    }).then(rs => {
+        if (rs)
+            res.json({ success: true })
+        else
+            res.json({ success: false })
+    })
+
+}
+
+function Comment(req, res) {
+    let data = req.data
+
+
 }
 module.exports = r
