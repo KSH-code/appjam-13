@@ -7,8 +7,9 @@
  */
 const test = false
 module.exports = {
-    host: 'localhost',
+    host: test ? 'localhost' : '127.0.0.1',
     user: 'root',
     database: 'appjam',
-    password: test ? 'root' : 'okok7882'
+    password: test ? 'root' : 'okok7882',
+    port: 3306
 }
