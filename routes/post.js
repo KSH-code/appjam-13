@@ -82,23 +82,25 @@ function Status(req, res) {
     let insertdata = [data.id]
     let url = (
         function() {
-            switch (data.imagename) {
-                case '공부':
-                    return 1
-                case '집':
-                    return 2
-                case '카페':
-                    return 3
-                case '술':
-                    return 4
-                case '이동중':
-                    return 5
-                case '노래방':
-                    return 6
-                case '쇼핑':
-                    return 7
+            return function() {
+                switch (data.imagename) {
+                    case '공부':
+                        return 1
+                    case '집':
+                        return 2
+                    case '카페':
+                        return 3
+                    case '술':
+                        return 4
+                    case '이동중':
+                        return 5
+                    case '노래방':
+                        return 6
+                    case '쇼핑':
+                        return 7
+                }
             }
-        })()
+        })()()
     let sql = 'select count(*) as count from `status` where `user_id` = ?'
     mysql.Select(sql, insertdata).then(rs => {
         insertdata = [data.id, data.name, data.starttime, url, data.endtime]
