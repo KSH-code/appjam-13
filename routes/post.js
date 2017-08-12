@@ -16,7 +16,7 @@ const r = function(app, _mysql) {
 function Register(req, res) {
     let data = req.body
     mysql.Select('select count(*) as co from `users` where `user_id` = ?', [data.id]).then(rs => {
-        if (rs.co > 0)
+        if (rs[0].co > 0)
             res.json({ text: '중복된 아이디 입니다.' })
         else {
             let insertdata = [data.id, data.password, data.name, data.type]
