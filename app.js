@@ -7,7 +7,7 @@
  */
 const express = require('express')
 const app = express()
-
+const cors = require('cors')
 const body_parser = require('body-parser')
 const express_fileupload = require('express-fileupload')
 
@@ -21,6 +21,7 @@ app.use(body_parser.json())
 app.use(express_fileupload())
 
 app.use(express.static(`${__dirname}/public`))
+app.use(cors())
 
 require('./routes/main')(app)
 
