@@ -43,7 +43,7 @@ function status(req, res) {
 function comment(req, res) {
     let data = req.body
     let insertdata = [req.params.id]
-    let sql = 'select u.name as userName, u.user_id as userID, c.message from `comments` as c inner join `users` as u on c.user_id = u.user_id where c.status_id = ?'
+    let sql = 'select `u`.name as userName, `u`.user_id as userID, `c`.message from `comments` as `c` inner join `users` as `u` on `c`.user_id = `u`.user_id where `c`.status_id = ?'
     mysql.Select(sql, insertdata).then(rs => {
         if (rs) {
             res.json(rs)
