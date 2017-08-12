@@ -73,15 +73,34 @@ function Profile(req, res) {
 
 function Status(req, res) {
     let data = req.data
-    let insertdata = [data.user_id]
+    let insertdata = [data.id]
+    let url = (
+        function() {
+            switch (data.imagename) {
+                case '공부':
+                    return 1
+                case '집':
+                    return 2
+                case '카페':
+                    return 3
+                case '술':
+                    return 4
+                case '이동중':
+                    return 5
+                case '노래방':
+                    return 6
+                case '쇼핑':
+                    return 7
+            }
+        })()
     let sql = 'select count(*) as count from `status` where `user_id` = ?'
     mysql.Select(sql, insertdata).then(rs => {
-        insertdata = [insertdata, data.name, data.starttime, data.url, data.endtime]
+        insertdata = [insertdata, data.name, data.starttime, url, data.endtime]
 
         if (rs.count == 0) {
             sql = 'insert into `status` (user_id,name,starttime,endtime,url) values (?,?,?,?,?)'
         } else {
-            insertdata = [data.name, data.starttime, data.endtime, data.url, insertdata]
+            insertdata = [data.name, data.starttime, data.endtime, url, insertdata]
             sql = 'update `status` set `name` = ?, `starttime` = ?, `endtime` = ?, `url` = ? where `user_id` = ?'
 
         }
