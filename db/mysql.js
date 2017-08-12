@@ -9,7 +9,7 @@ const mysql = require('mysql')
 
 module.exports = () => {
     const con = mysql.createConnection(require('./config'))
-    con.connect()
+    con.connect(e => { console.log(e) })
     return {
         Select: (sql, data = []) => {
             return new Promise((resolve, reject) => {
