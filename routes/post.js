@@ -139,7 +139,7 @@ function Comment(req, res) {
 function IMG(req, res) {
     let photo = req.files.file
     if (photo) {
-        let dir = __dirname + '/public/profile/' + req.params.id
+        let dir = __dirname + '/public/img/profile/' + req.params.id
         if (!fs.existsSync(dir)) {
             fs.mkdirSync(dir)
         }

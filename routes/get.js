@@ -23,7 +23,7 @@ function statusList(req, res) {
         if (rs.length > 0)
             res.json(rs)
         else
-            res.json({ success: false })
+            res.json({ success: 'false' })
     })
 
 }
@@ -36,7 +36,7 @@ function status(req, res) {
         if (rs.length > 0)
             res.json(rs)
         else
-            res.json({ success: false })
+            res.json({ success: 'false' })
     }, e => { console.log(e) })
 }
 
@@ -46,10 +46,9 @@ function comment(req, res) {
     let sql = 'select u.name as userName, u.user_id as userID, c.message from `comments` as c inner join `users` as u on c.user_id = u.user_id where c.status_id = ?'
     mysql.Select(sql, insertdata).then(rs => {
         if (rs) {
-            rs.success = true
             res.json(rs)
         } else
-            res.json({ success: false })
+            res.json({ success: 'false' })
     })
 }
 module.exports = r
