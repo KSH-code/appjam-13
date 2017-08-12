@@ -116,7 +116,7 @@ function Status(req, res) {
 
     }).then(rs => {
         if (rs)
-            res.json({ success: 'true' })
+            res.json({ success: 'true', text: url })
         else
             res.json({ success: 'false' })
     })
