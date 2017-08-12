@@ -101,12 +101,12 @@ function Status(req, res) {
         })()
     let sql = 'select count(*) as count from `status` where `user_id` = ?'
     mysql.Select(sql, insertdata).then(rs => {
-        insertdata = [insertdata, data.name, data.starttime, url, data.endtime]
+        insertdata = [data.id, data.name, data.starttime, url, data.endtime]
 
         if (rs.count == 0) {
             sql = 'insert into `status` (user_id,name,starttime,endtime,url) values (?,?,?,?,?)'
         } else {
-            insertdata = [data.name, data.starttime, data.endtime, url, insertdata]
+            insertdata = [data.name, data.starttime, data.endtime, url, data.id]
             sql = 'update `status` set `name` = ?, `starttime` = ?, `endtime` = ?, `url` = ? where `user_id` = ?'
 
         }
