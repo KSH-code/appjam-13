@@ -7,11 +7,6 @@
  */
 module.exports = (app) => {
     let mysql = require('../db/mysql')()
-    mysql.con.query('select * from `users`', (e, rs) => {
-        if (e)
-            console.log(e)
-        console.log(rs)
-    })
     require('./get')(app, mysql)
     require('./post')(app, mysql)
 }

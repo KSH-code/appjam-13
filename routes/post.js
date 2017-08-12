@@ -15,18 +15,13 @@ const r = function(app, _mysql) {
 
 function Register(req, res) {
     let data = req.body
-    console.log(data)
-    console.log()
-    console.log(mysql)
     mysql.Select('select count(*) as co from `users` where `user_id` = ?', [data.id]).then(rs => {
-        console.log(rs)
         if (rs.co > 0)
             res.json({ text: '중복된 아이디 입니다.' })
         else {
             let insertdata = [data.id, data.password, data.name, data.type]
             let sql = 'insert into `users` (user_id,pw,name,type,family_idx) values(?,?,?,?,?)'
             let key = data.familykey
-            console.log(key.length)
             if (key.length) {
                 insertdata.push(key)
                 return mysql.Execute(sql, insertdata)
@@ -39,7 +34,7 @@ function Register(req, res) {
 
         }
     }).then(rs => {
-        if (rs && rs.length)
+        if (rs)
             res.json({ text: 'true' })
         else
             res.json({ text: '알 수 없는 오류입니다.' })

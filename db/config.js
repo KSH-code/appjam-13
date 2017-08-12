@@ -12,5 +12,5 @@ module.exports = {
     database: 'appjam',
     password: test ? 'root' : 'okok7882',
     port: 3306,
-    socketPath: '/var/run/mysqld/mysqld.sock'
+    socketPath: test ? '' : '/var/run/mysqld/mysqld.sock'
 }
