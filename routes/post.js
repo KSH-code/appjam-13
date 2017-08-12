@@ -78,7 +78,7 @@ function Profile(req, res) {
 }
 
 function Status(req, res) {
-    let data = req.data
+    let data = req.body
     let insertdata = [data.id]
     let url = (
         function() {
