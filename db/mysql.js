@@ -27,6 +27,7 @@ module.exports = () => {
                     resolve(rs)
                 })
             })
-        }
+        },
+        con: con
     }
 }
