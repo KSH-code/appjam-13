@@ -15,6 +15,7 @@ const r = function(app, _mysql) {
 
 function Register(req, res) {
     let data = req.body
+    console.log(data)
     mysql.Select('select count(*) as count from `users` where `user_id` = ?', [data.id]).then(rs => {
         console.log(rs)
         if (rs.count > 0)
