@@ -16,6 +16,8 @@ const r = function(app, _mysql) {
 function Register(req, res) {
     let data = req.body
     console.log(data)
+    console.log()
+    console.log(mysql)
     mysql.Select('select count(*) as co from `users` where `user_id` = ?', [data.id]).then(rs => {
         console.log(rs)
         if (rs.co > 0)
@@ -24,12 +26,13 @@ function Register(req, res) {
             let insertdata = [data.id, data.password, data.name, data.type]
             let sql = 'insert into `users` (user_id,pw,name,type,family_idx) values(?,?,?,?,?)'
             let key = data.familykey
-            if (key) {
-                insertdata.push(data.familykey)
+            console.log(key.length)
+            if (key.length) {
+                insertdata.push(key)
                 return mysql.Execute(sql, insertdata)
             } else {
                 return mysql.Execute('insert into `families` (idx) values (NULL)').then(rs => {
-                    insertdata.push(rs.insertedId)
+                    insertdata.push(rs.insertId)
                     return mysql.Execute(sql, insertdata)
                 })
             }
