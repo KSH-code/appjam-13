@@ -46,7 +46,7 @@ function Register(req, res) {
 function Login(req, res) {
     let data = req.body
     let insertdata = [data.id, data.password]
-    mysql.Select('select * from `users` where `user_id` = ? and `pw` = ?', insertdata).then(rs => {
+    mysql.Select('select user_id as id,name,pw as password, family_idx as familyKey from `users` where `user_id` = ? and `pw` = ?', insertdata).then(rs => {
         if (rs && rs.length) {
             let jsonData = rs[0]
             jsonData.success = true
