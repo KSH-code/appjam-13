@@ -32,7 +32,6 @@ function status(req, res) {
     let sql = 'select u.user_id as userID,u.type as userType,s.img as statusURL,s.starttime as startTime,s.endtime as endTime,s.name from users as u inner join `status` as s on s.`user_id`=u.`user_id` where u.user_id = ?'
     let insertdata = [id]
     mysql.Select(sql, insertdata).then(rs => {
-        console.log(rs)
         if (rs.length > 0)
             res.json(rs)
         else
