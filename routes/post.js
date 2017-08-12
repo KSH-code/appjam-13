@@ -106,10 +106,10 @@ function Status(req, res) {
         insertdata = [data.id, data.name, data.starttime, url, data.endtime]
 
         if (rs.count == 0) {
-            sql = 'insert into `status` (user_id,name,starttime,endtime,url) values (?,?,?,?,?)'
+            sql = 'insert into `status` (user_id,name,starttime,endtime,img) values (?,?,?,?,?)'
         } else {
             insertdata = [data.name, data.starttime, data.endtime, url, data.id]
-            sql = 'update `status` set `name` = ?, `starttime` = ?, `endtime` = ?, `url` = ? where `user_id` = ?'
+            sql = 'update `status` set `name` = ?, `starttime` = ?, `endtime` = ?, `img` = ? where `user_id` = ?'
 
         }
         return mysql.Execute(sql, insertdata)
@@ -124,7 +124,7 @@ function Status(req, res) {
 }
 
 function Comment(req, res) {
-    let data = req.data
+    let data = req.body
 
 
 }
@@ -137,8 +137,9 @@ function IMG(req, res) {
         if (!fs.existsSync(dir)) {
             fs.mkdirSync(dir)
         }
-        fs.writeFileSync(`${dir}/1.png`, files.data)
+        fs.writeFileSync(`${dir}/1.png`, photo.data)
+        res.json({ success: 'true' })
     } else
-        res.json({ success: false })
+        res.json({ success: 'false' })
 }
 module.exports = r
