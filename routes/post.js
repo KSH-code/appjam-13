@@ -25,11 +25,11 @@ function Register(req, res) {
             let key = data.familykey
             if (key) {
                 insertdata.push(data.familykey)
-                return mysql.ExeCute(sql, insertdata)
+                return mysql.Execute(sql, insertdata)
             } else {
-                return mysql.ExeCute('insert into `families` (idx) values (NULL)').then(rs => {
+                return mysql.Execute('insert into `families` (idx) values (NULL)').then(rs => {
                     insertdata.push(rs.insertedId)
-                    return mysql.ExeCute(sql, insertdata)
+                    return mysql.Execute(sql, insertdata)
                 })
             }
 

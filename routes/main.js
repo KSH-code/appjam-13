@@ -9,10 +9,4 @@ module.exports = (app) => {
     let mysql = require('../db/mysql')()
     require('./get')(app, mysql)
     require('./post')(app, mysql)
-    let data = {
-        id: 'test1',
-        password: 'test1',
-        name: 'test1',
-        familykey: ''
-    }
 }
