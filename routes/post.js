@@ -14,7 +14,7 @@ const r = function(app, _mysql) {
     app.post('/status', Status)
     app.post('/comment/:idx', Comment)
     app.post('/profile', Profile)
-    app.post('/image', IMG)
+    app.post('/image/:id', IMG)
 }
 
 function Register(req, res) {
@@ -130,13 +130,9 @@ function Comment(req, res) {
 }
 
 function IMG(req, res) {
-    let data = req.body
-    console.log(req.files)
     let photo = req.files.file
-    console.log(data)
-    console.log(photo)
     if (photo) {
-        let dir = __dirname + '/public/profile/' + data.id
+        let dir = __dirname + '/public/profile/' + req.params.id
         if (!fs.existsSync(dir)) {
             fs.mkdirSync(dir)
         }
