@@ -15,7 +15,7 @@ function statusList(req, res) {
     let data = req.body
     let fk = req.params.familykey
 
-    let sql = 'select u.user_id as userid,u.type as type,s.img as imgurl,u.name as user_name,s.starttime,s.endtime,s.name from users as u inner join `status` as s on s.`user_id`=u.`user_id` where family_idx = ?'
+    let sql = 'select u.user_id as userId,u.type as userType,s.img as statusURL,s.starttime as startTime,s.endtime as endTime,s.name from users as u inner join `status` as s on s.`user_id`=u.`user_id` where family_idx = ?'
     let insertdata = [fk]
     mysql.Select(sql, fk).then(rs => {
         res.json(rs)
