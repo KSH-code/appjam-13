@@ -13,6 +13,7 @@ const r = function(app, _mysql) {
     app.post('/login', Login)
     app.post('/status/:id', Status)
     app.post('/comment/:idx', Comment)
+    app.post('/profile', Profile)
 }
 
 function Register(req, res) {
