@@ -13,6 +13,8 @@ module.exports = () => {
         Select: (sql, data = []) => {
             return new Promise((resolve, reject) => {
                 con.query(sql, data, (e, rs) => {
+                    if (e)
+                        console.log(e)
                     resolve(rs)
                 })
             })
@@ -20,6 +22,8 @@ module.exports = () => {
         Execute: (sql, data = []) => {
             return new Promise((resolve, reject) => {
                 con.query(sql, data, (e, rs) => {
+                    if (e)
+                        console.log(e)
                     resolve(rs)
                 })
             })
