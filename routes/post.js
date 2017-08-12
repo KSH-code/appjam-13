@@ -35,7 +35,7 @@ function Register(req, res) {
         }
     }).then(rs => {
         if (rs && rs.length)
-            res.json({ text: '' })
+            res.json({ text: 'true' })
         else
             res.json({ text: '알 수 없는 오류입니다.' })
     })

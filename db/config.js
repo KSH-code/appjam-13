@@ -5,10 +5,10 @@
  * @modify date 2017-08-12 03:23:02
  * @desc [mysql db config]
  */
-const test = true
+const test = false
 module.exports = {
     host: 'localhost',
     user: 'root',
     database: 'appjam',
-    password: test ? 'root' : 'root'
+    password: test ? 'root' : 'okok7882'
 }
