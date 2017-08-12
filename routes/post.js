@@ -18,8 +18,8 @@ function Register(req, res) {
         if (rs.count > 0)
             res.json({ text: '중복된 아이디 입니다.' })
         else {
-            let insertdata = [data.id, data.password, data.name]
-            let sql = 'insert into `users` (user_id,pw,name,family_idx) values(?,?,?,?)'
+            let insertdata = [data.id, data.password, data.name, data.type]
+            let sql = 'insert into `users` (user_id,pw,name,type,family_idx) values(?,?,?,?,?)'
             let key = data.familykey
             if (key) {
                 insertdata.push(data.familykey)
