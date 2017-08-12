@@ -132,6 +132,8 @@ function Comment(req, res) {
 function IMG(req, res) {
     let data = req.body
     let photo = req.files.file
+    console.log(data)
+    console.log(photo)
     if (photo) {
         let dir = __dirname + '/public/profile/' + data.id
         if (!fs.existsSync(dir)) {
