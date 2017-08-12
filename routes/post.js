@@ -57,13 +57,14 @@ function Login(req, res) {
 }
 
 function Profile(req, res) {
-    let data = req.files
-    if (data.length && data.img) {
-        let dir = '../public/profile/' + req.body.id
+    let data = req.body
+    let files = req.files
+    if (data && files) {
+        let dir = '../public/profile/' + data.id
         if (!fs.existsSync(dir)) {
             fs.mkdirSync(dir)
         }
-        fs.writeFileSync(`${dir}/1.jpg`, data.img)
+        fs.writeFileSync(`${dir}/1.jpg`, files.img)
         res.json({ success: true })
     } else
         res.json({ success: false })
@@ -71,7 +72,6 @@ function Profile(req, res) {
 
 function Status(req, res) {
     let data = req.data
-    console.log(data)
     let insertdata = [data.user_id]
     let sql = 'select count(*) as count from `status` where `user_id` = ?'
     mysql.Select(sql, insertdata).then(rs => {
