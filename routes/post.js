@@ -5,8 +5,10 @@
  * @modify date 2017-08-12 06:08:00
  * @desc [post method]
  */
+var mysql
 const fs = require('fs')
-const r = function(app, mysql) {
+const r = function(app, _mysql) {
+    mysql = _mysql
     app.post('/register', Register)
     app.post('/login', Login)
 }
