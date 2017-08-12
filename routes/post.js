@@ -126,9 +126,9 @@ function Status(req, res) {
 function Comment(req, res) {
     let data = req.body
     let insertdata = [data.owner, data.user, data.message]
-    let sql = 'insert into `comments`(status_id,user_id,message) values(?,?,?)'
+    let sql = 'insert into `comments` (status_id,user_id,message) values(?,?,?)'
     mysql.Execute(sql, insertdata).then(rs => {
-        if (rs[0].insertId)
+        if (rs.insertId)
             res.json({ success: 'true' })
         else
             res.json({ success: 'false' })
