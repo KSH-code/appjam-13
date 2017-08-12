@@ -105,7 +105,7 @@ function Status(req, res) {
     mysql.Select(sql, insertdata).then(rs => {
         insertdata = [data.id, data.name, data.starttime, url, data.endtime]
 
-        if (rs.count == 0) {
+        if (rs[0].count == 0) {
             sql = 'insert into `status` (user_id,name,starttime,endtime,img) values (?,?,?,?,?)'
         } else {
             insertdata = [data.name, data.starttime, data.endtime, url, data.id]
