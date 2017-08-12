@@ -63,7 +63,6 @@ CREATE TABLE `families` (
 
 LOCK TABLES `families` WRITE;
 /*!40000 ALTER TABLE `families` DISABLE KEYS */;
-INSERT INTO `families` VALUES (1),(2),(3),(4),(5),(6),(7),(8),(9),(10),(11),(12),(13),(14),(15);
 /*!40000 ALTER TABLE `families` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -77,8 +76,8 @@ DROP TABLE IF EXISTS `status`;
 CREATE TABLE `status` (
   `user_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `name` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `starttime` datetime NOT NULL,
-  `endtime` datetime NOT NULL,
+  `starttime` varchar(10) NOT NULL,
+  `endtime` varchar(10) NOT NULL,
   `img` tinyint(2) unsigned NOT NULL,
   PRIMARY KEY (`user_id`),
   CONSTRAINT `fk_status_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -91,7 +90,6 @@ CREATE TABLE `status` (
 
 LOCK TABLES `status` WRITE;
 /*!40000 ALTER TABLE `status` DISABLE KEYS */;
-INSERT INTO `status` VALUES ('a','a','2017-01-01 11:11:11','2017-01-01 11:11:12',3),('aa','aa','2017-01-01 11:11:11','2017-01-01 11:11:12',4),('admin','안녕','2017-01-01 11:11:11','2017-01-01 11:11:12',1),('test1','하세요','2017-01-01 11:11:11','2017-01-01 11:11:12',2);
 /*!40000 ALTER TABLE `status` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -120,7 +118,6 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('a','a','a','a',11),('aa','aa','a','a',1),('aaa','aa','a','a',1),('aaaa','aa','a','a',1),('aaaaa','aa','a','a',1),('aaaaaa','aa','a','a',1),('aaaaaag','aa','a','a',1),('admin','admin','admin','안녕',1),('test1','test1','test1','하세요',1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -133,4 +130,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-08-13  1:36:33
+-- Dump completed on 2017-08-13  4:39:36

@@ -11,9 +11,10 @@ const r = function(app, _mysql) {
     mysql = _mysql
     app.post('/register', Register)
     app.post('/login', Login)
-    app.post('/status/:id', Status)
+    app.post('/status', Status)
     app.post('/comment/:idx', Comment)
     app.post('/profile', Profile)
+    app.post('/img', IMG)
 }
 
 function Register(req, res) {
@@ -59,16 +60,21 @@ function Login(req, res) {
 
 function Profile(req, res) {
     let data = req.body
-    let files = req.files
-    if (data && files) {
-        let dir = '../public/profile/' + data.id
-        if (!fs.existsSync(dir)) {
-            fs.mkdirSync(dir)
+    let insertdata = [data.id, data.password, data.familyCode, data.oldid]
+        //id password familyCode  
+    mysql.Select('select count(*) as co from `users` where `user_id` = ?', [data.id]).then(rs => {
+        if (rs[0].co > 0)
+            res.json({ text: '중복된 아이디 입니다.' })
+        else {
+            mysql.Execute('update `users` set `user_id` = ?, `pw` = ?, `family_idx` = ? where user_id = ?', insertdata).then(rs => {
+                if (rs)
+                    res.json({ success: true })
+                else
+                    res.json({ success: false })
+            })
         }
-        fs.writeFileSync(`${dir}/1.png`, files.img)
-        res.json({ success: true })
-    } else
-        res.json({ success: false })
+    })
+
 }
 
 function Status(req, res) {
@@ -119,5 +125,18 @@ function Comment(req, res) {
     let data = req.data
 
 
+}
+
+function IMG(req, res) {
+    let data = req.data
+    let photo = req.files.file
+    if (photo) {
+        let dir = '../public/profile/' + data.id
+        if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir)
+        }
+        fs.writeFileSync(`${dir}/1.png`, files.photo)
+    } else
+        res.json({ success: false })
 }
 module.exports = r
